@@ -491,74 +491,8 @@
 
 	display-subsystem {
 		compatible = "rockchip,display-subsystem";
-		memory-region = <0x0f 0x10>;
-		memory-region-names = "drm-logo\0drm-cubic-lut";
 		ports = <0x11>;
-		devfreq = <0x12>;
 		phandle = <0x182>;
-
-		route {
-
-			route-dsi0 {
-				status = "okay";
-				logo,uboot = "logo.bmp";
-				logo,kernel = "logo_kernel.bmp";
-				logo,mode = "center";
-				charge_logo,mode = "center";
-				connect = <0x13>;
-				phandle = <0x183>;
-			};
-
-			route-dsi1 {
-				status = "disabled";
-				logo,uboot = "logo.bmp";
-				logo,kernel = "logo_kernel.bmp";
-				logo,mode = "center";
-				charge_logo,mode = "center";
-				connect = <0x14>;
-				phandle = <0x184>;
-			};
-
-			route-edp {
-				status = "disabled";
-				logo,uboot = "logo.bmp";
-				logo,kernel = "logo_kernel.bmp";
-				logo,mode = "center";
-				charge_logo,mode = "center";
-				connect = <0x15>;
-				phandle = <0x185>;
-			};
-
-			route-hdmi {
-				status = "okay";
-				logo,uboot = "logo.bmp";
-				logo,kernel = "logo_kernel.bmp";
-				logo,mode = "center";
-				charge_logo,mode = "center";
-				connect = <0x16>;
-				phandle = <0x186>;
-			};
-
-			route-lvds {
-				status = "disabled";
-				logo,uboot = "logo.bmp";
-				logo,kernel = "logo_kernel.bmp";
-				logo,mode = "center";
-				charge_logo,mode = "center";
-				connect = <0x17>;
-				phandle = <0x187>;
-			};
-
-			route-rgb {
-				status = "disabled";
-				logo,uboot = "logo.bmp";
-				logo,kernel = "logo_kernel.bmp";
-				logo,mode = "center";
-				charge_logo,mode = "center";
-				connect = <0x18>;
-				phandle = <0x188>;
-			};
-		};
 	};
 
 	dmcdbg {
@@ -2520,23 +2454,18 @@
 	};
 
 	vop@fe040000 {
-		compatible = "rockchip,rk3568-vop";
+		compatible = "rockchip,rk3566-vop";
 		reg = <0x00 0xfe040000 0x00 0x3000 0x00 0xfe044000 0x00 0x1000>;
-		reg-names = "regs\0gamma_lut";
+		reg-names = "vop\0gamma-lut";
 		interrupts = <0x00 0x94 0x04>;
 		clocks = <0x26 0xdd 0x26 0xde 0x26 0xdf 0x26 0xe0 0x26 0xe1>;
-		clock-names = "aclk_vop\0hclk_vop\0dclk_vp0\0dclk_vp1\0dclk_vp2";
-		rockchip,aclk-normal-mode-rates = <0x179a7b00>;
-		rockchip,aclk-advanced-mode-rates = <0x1dcd6500>;
-		operating-points-v2 = <0x95>;
+		clock-names = "aclk\0hclk\0dclk_vp0\0dclk_vp1\0dclk_vp2";
 		iommus = <0x96>;
 		power-domains = <0x28 0x09>;
 		rockchip,grf = <0x39>;
 		status = "okay";
-		vop-supply = <0x6b>;
-		assigned-clocks = <0x26 0xdf 0x26 0xe0 0x26 0xe1>;
-		assigned-clock-parents = <0x38 0x02 0x26 0x05 0x26 0x04>;
-		disable-win-move;
+		assigned-clocks = <0x26 0xdf 0x26 0xe0>;
+		assigned-clock-parents = <0x38 0x02 0x26 0x05>;
 		phandle = <0x1d2>;
 
 		ports {
@@ -2548,29 +2477,9 @@
 				reg = <0x00>;
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
-				cursor-win-id = <0x00>;
 				phandle = <0x1d3>;
-
-				endpoint@0 {
-					reg = <0x00>;
-					remote-endpoint = <0x97>;
-					phandle = <0xa2>;
-				};
-
-				endpoint@1 {
-					reg = <0x01>;
-					remote-endpoint = <0x98>;
-					phandle = <0xab>;
-				};
-
 				endpoint@2 {
 					reg = <0x02>;
-					remote-endpoint = <0x99>;
-					phandle = <0xb7>;
-				};
-
-				endpoint@3 {
-					reg = <0x03>;
 					remote-endpoint = <0x9a>;
 					phandle = <0x16>;
 				};
@@ -2580,56 +2489,12 @@
 				reg = <0x01>;
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
-				phandle = <0x1d4>;
-
-				endpoint@0 {
-					reg = <0x00>;
-					remote-endpoint = <0x9b>;
-					phandle = <0x13>;
-				};
-
-				endpoint@1 {
-					reg = <0x01>;
-					remote-endpoint = <0x9c>;
-					phandle = <0x14>;
-				};
-
-				endpoint@2 {
-					reg = <0x02>;
-					remote-endpoint = <0x9d>;
-					phandle = <0x15>;
-				};
-
-				endpoint@3 {
-					reg = <0x03>;
-					remote-endpoint = <0x9e>;
-					phandle = <0xb5>;
-				};
-
-				endpoint@4 {
-					reg = <0x04>;
-					remote-endpoint = <0x9f>;
-					phandle = <0x17>;
-				};
 			};
 
 			port@2 {
 				reg = <0x02>;
 				#address-cells = <0x01>;
 				#size-cells = <0x00>;
-				phandle = <0x1d5>;
-
-				endpoint@0 {
-					reg = <0x00>;
-					remote-endpoint = <0xa0>;
-					phandle = <0x36>;
-				};
-
-				endpoint@1 {
-					reg = <0x01>;
-					remote-endpoint = <0xa1>;
-					phandle = <0x18>;
-				};
 			};
 		};
 	};
@@ -2904,8 +2769,8 @@
 		compatible = "rockchip,rk3568-dw-hdmi";
 		reg = <0x00 0xfe0a0000 0x00 0x20000>;
 		interrupts = <0x00 0x2d 0x04>;
-		clocks = <0x26 0xe6 0x26 0xe7 0x26 0x193 0x38 0x02 0x26 0xde>;
-		clock-names = "iahb\0isfr\0cec\0ref\0hclk";
+		clocks = <0x26 0xe6 0x26 0xe7 0x26 0x193 0x38 0x28 0x26 0xda>;
+		clock-names = "iahb\0isfr\0cec\0ref";
 		pinctrl-names = "default";
 		pinctrl-0 = <0xb2 0xb3 0xb4>;
 		power-domains = <0x28 0x09>;
@@ -2913,7 +2778,8 @@
 		rockchip,grf = <0x39>;
 		#sound-dai-cells = <0x00>;
 		status = "okay";
-		rockchip,phy-table = <0x58834d4 0x8009 0x00 0x270 0x9d5b340 0x800b 0x00 0x26d 0xb1069a8 0x800b 0x00 0x1ed 0x11b3dc40 0x800b 0x00 0x1ad 0x2367b880 0x8029 0x00 0x88 0x00 0x00 0x00 0x00>;
+		avdd-0v9-supply = <0x1b2>;
+		avdd-1v8-supply = <0x1b6>;
 		phandle = <0x1d>;
 
 		ports {
@@ -4239,7 +4105,7 @@
 		pinctrl-names = "default";
 		reg-io-width = <0x04>;
 		reg-shift = <0x02>;
-		status = "disabled";
+		status = "okay";
 		phandle = <0x20c>;
 	};
 
@@ -7993,8 +7859,8 @@
 		clock-names = "ext_clock";
 		pinctrl-names = "default";
 		pinctrl-0 = <0x15f>;
-		post-power-on-delay-ms = <0xc8>;
-		reset-gpios = <0xd3 0x09 0x01>;
+		post-power-on-delay-ms = <0x1f4>;
+		reset-gpios = <0xd8 0x19 0x00 0xd3 0x09 0x01>;
 		phandle = <0xca>;
 	};
 

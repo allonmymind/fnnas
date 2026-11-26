@@ -4861,6 +4861,13 @@
 				output-high;
 				line-name = "usb-host3-pwren";
 			};
+
+			wifi-vbat-hog {
+				gpio-hog;
+				gpios = <0x19 0x00>;
+				output-high;
+				line-name = "wifi-vbat";
+			};
 		};
 
 		gpio@fe770000 {
@@ -7855,7 +7862,7 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <0x15f>;
 		post-power-on-delay-ms = <0x1f4>;
-		reset-gpios = <0xd8 0x19 0x00 0xd3 0x09 0x01>;
+		reset-gpios = <0xd3 0x09 0x01>;
 		phandle = <0xca>;
 	};
 

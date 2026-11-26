@@ -2356,7 +2356,7 @@
 			phy@0 {
 				compatible = "ethernet-phy-ieee802.3-c22";
 				reg = <0x00>;
-				maxio,led-data = <0x11b>;
+				maxio,led-data = <0x368>;
 				phandle = <0x8d>;
 			};
 		};

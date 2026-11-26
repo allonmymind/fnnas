@@ -1774,7 +1774,7 @@
 	};
 
 	iommu@fde4b000 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfde4b000 0x00 0x40>;
 		interrupts = <0x00 0x97 0x04>;
 		interrupt-names = "rknpu_mmu";
@@ -1877,7 +1877,7 @@
 	};
 
 	iommu@fdea0800 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfdea0800 0x00 0x40>;
 		interrupts = <0x00 0x8a 0x04>;
 		interrupt-names = "vdpu_mmu";
@@ -1933,7 +1933,7 @@
 	};
 
 	iommu@fded0480 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfded0480 0x00 0x40>;
 		interrupts = <0x00 0x3d 0x04>;
 		interrupt-names = "jpegd_mmu";
@@ -1964,7 +1964,7 @@
 	};
 
 	iommu@fdee0800 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfdee0800 0x00 0x40>;
 		interrupts = <0x00 0x3f 0x04>;
 		interrupt-names = "vepu_mmu";
@@ -1994,7 +1994,7 @@
 	};
 
 	iommu@fdef0800 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfdef0800 0x00 0x100>;
 		interrupts = <0x00 0x38 0x04>;
 		interrupt-names = "iep_mmu";
@@ -2060,7 +2060,7 @@
 	};
 
 	iommu@fdf40f00 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfdf40f00 0x00 0x40 0x00 0xfdf40f40 0x00 0x40>;
 		interrupts = <0x00 0x8d 0x04 0x00 0x8e 0x04>;
 		interrupt-names = "rkvenc_mmu0\0rkvenc_mmu1";
@@ -2125,7 +2125,7 @@
 	};
 
 	iommu@fdf80800 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfdf80800 0x00 0x40 0x00 0xfdf80840 0x00 0x40>;
 		interrupts = <0x00 0x5c 0x04>;
 		interrupt-names = "rkvdec_mmu";
@@ -2171,7 +2171,7 @@
 	};
 
 	iommu@fdfe0800 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfdfe0800 0x00 0x100>;
 		interrupts = <0x00 0x92 0x04>;
 		interrupt-names = "cif_mmu";
@@ -2250,7 +2250,7 @@
 	};
 
 	iommu@fdff1a00 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfdff1a00 0x00 0x100>;
 		interrupts = <0x00 0x3b 0x04>;
 		interrupt-names = "isp_mmu";
@@ -2520,13 +2520,14 @@
 	};
 
 	iommu@fe043e00 {
-		compatible = "rockchip,iommu-v2";
+		compatible = "rockchip,rk3568-iommu";
 		reg = <0x00 0xfe043e00 0x00 0x100 0x00 0xfe043f00 0x00 0x100>;
 		interrupts = <0x00 0x94 0x04>;
 		interrupt-names = "vop_mmu";
 		clocks = <0x26 0xdd 0x26 0xde>;
 		clock-names = "aclk\0iface";
 		#iommu-cells = <0x00>;
+		power-domains = <0x28 0x09>;
 		rockchip,disable-device-link-resume;
 		status = "okay";
 		phandle = <0x96>;
@@ -2798,12 +2799,6 @@
 					phandle = <0x9a>;
 				};
 
-				endpoint@1 {
-					reg = <0x01>;
-					remote-endpoint = <0xb5>;
-					status = "disabled";
-					phandle = <0x9e>;
-				};
 			};
 		};
 	};

@@ -119,6 +119,22 @@ fi
 # For CX3566-Z (rk3566) board: enable board services (Ethernet LED map fix,
 # deferred AIC8800 WiFi/BT module load - boot-time load wedges the 6.12 kernel)
 if [[ "${FDTFILE}" == "rk3566-cx3566-z.dtb" ]]; then
+    # Mask stock services whose hardware/functions do not exist on this
+    # board (UPS, SMART disks, md RAID, mail transport, other boards'
+    # LED/GPIO setup, WSD discovery). Four of them keep their unit files
+    # in /etc/systemd/system, which blocks systemctl mask until the file
+    # is moved aside (kept as .bak-cx, reversible).
+    for u in exim4 nut-monitor nut-server smartmontools; do
+        systemctl mask ${u}.service >/dev/null 2>&1
+    done
+    for u in led-set set_gpio-init trim_raid_check wsdd2; do
+        uf="/etc/systemd/system/${u}.service"
+        if [[ -f "${uf}" && ! -L "${uf}" ]]; then
+            mv "${uf}" "${uf}.bak-cx" >/dev/null 2>&1
+        fi
+        systemctl mask ${u}.service >/dev/null 2>&1
+    done
+    systemctl daemon-reload >/dev/null 2>&1
     (
         systemctl enable --now phy-led.service >/dev/null 2>&1
         systemctl enable --now aic-late-load.service >/dev/null 2>&1

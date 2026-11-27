@@ -1,17 +1,11 @@
 [Unit]
-Description=Load AIC8800 WiFi/BT modules after boot settles
+Description=Load self-built AIC8800 WiFi driver (CX3566-Z)
 After=multi-user.target
+Wants=multi-user.target
 
 [Service]
 Type=oneshot
-ExecStartPre=/bin/sleep 10
-ExecStart=-/sbin/modprobe aic8800_bsp
-ExecStart=-/bin/sh -c "echo fe2c0000.mmc > /sys/bus/platform/drivers/dwmmc_rockchip/unbind"
-ExecStart=/bin/sleep 2
-ExecStart=-/bin/sh -c "echo fe2c0000.mmc > /sys/bus/platform/drivers/dwmmc_rockchip/bind"
-ExecStart=/bin/sleep 3
-ExecStart=-/sbin/modprobe aic8800_fdrv
-ExecStart=-/sbin/modprobe aic_btusb
+ExecStart=/usr/local/lib/aic8800/load-aic.sh
 RemainAfterExit=yes
 
 [Install]

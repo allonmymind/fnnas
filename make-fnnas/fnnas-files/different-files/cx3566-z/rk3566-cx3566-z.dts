@@ -541,31 +541,37 @@
 		phandle = <0x6c>;
 
 		opp-200000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0xbebc200>;
 			opp-microvolt = <0xcf850>;
 		};
 
 		opp-300000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x11e1a300>;
 			opp-microvolt = <0xcf850>;
 		};
 
 		opp-400000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x17d78400>;
 			opp-microvolt = <0xcf850>;
 		};
 
 		opp-600000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x23c34600>;
 			opp-microvolt = <0xcf850>;
 		};
 
 		opp-700000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x29b92700>;
 			opp-microvolt = <0xdbba0>;
 		};
 
 		opp-800000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x2faf0800>;
 			opp-microvolt = <0xe7ef0>;
 		};
@@ -656,18 +662,6 @@
 		#size-cells = <0x02>;
 		ranges;
 		phandle = <0x18f>;
-
-		drm-logo@0 {
-			compatible = "rockchip,drm-logo";
-			reg = <0x00 0x00 0x00 0x00>;
-			phandle = <0x0f>;
-		};
-
-		drm-cubic-lut@0 {
-			compatible = "rockchip,drm-cubic-lut";
-			reg = <0x00 0x00 0x00 0x00>;
-			phandle = <0x10>;
-		};
 
 		ramoops@110000 {
 			compatible = "ramoops";
@@ -1146,6 +1140,7 @@
 	clock-controller@fdd20000 {
 		compatible = "rockchip,rk3568-cru";
 		reg = <0x00 0xfdd20000 0x00 0x1000>;
+		rockchip,grf = <0x39>;
 		clocks = <0x199>;
 		clock-names = "xin24m";
 		#clock-cells = <0x01>;
@@ -1696,41 +1691,49 @@
 		phandle = <0x65>;
 
 		opp-200000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0xbebc200>;
 			opp-microvolt = <0xcf850 0xcf850 0xf4240>;
 		};
 
 		opp-300000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x11b3dc40>;
 			opp-microvolt = <0xcf850 0xcf850 0xf4240>;
 		};
 
 		opp-400000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x17d78400>;
 			opp-microvolt = <0xcf850 0xcf850 0xf4240>;
 		};
 
 		opp-600000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x23c34600>;
 			opp-microvolt = <0xcf850 0xcf850 0xf4240>;
 		};
 
 		opp-700000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x29b92700>;
 			opp-microvolt = <0xd59f8 0xd59f8 0xf4240>;
 		};
 
 		opp-800000000 {
+			opp-supported-hw = <0xfb 0xffff>;
 			opp-hz = <0x00 0x2faf0800>;
 			opp-microvolt = <0xe1d48 0xe1d48 0xf4240>;
 		};
 
 		opp-900000000 {
+			opp-supported-hw = <0xf9 0xffff>;
 			opp-hz = <0x00 0x35a4e900>;
 			opp-microvolt = <0xee098 0xee098 0xf4240>;
 		};
 
 		opp-1000000000 {
+			opp-supported-hw = <0xf9 0xffff>;
 			opp-hz = <0x00 0x3b9aca00>;
 			opp-microvolt = <0xf4240 0xf4240 0xf4240>;
 			status = "disabled";
@@ -2043,8 +2046,8 @@
 
 	rkvenc-opp-table {
 		compatible = "operating-points-v2";
-		nvmem-cells = <0x07>;
-		nvmem-cell-names = "pvtm";
+		nvmem-cells = <0x79 0x07>;
+		nvmem-cell-names = "leakage\0pvtm";
 		rockchip,pvtm-voltage-sel = <0x00 0x14820 0x00 0x14821 0x16378 0x01 0x16379 0x186a0 0x02>;
 		rockchip,pvtm-ch = <0x00 0x05>;
 		phandle = <0x75>;
@@ -3032,7 +3035,8 @@
 	dfi@fe230000 {
 		reg = <0x00 0xfe230000 0x00 0x400>;
 		compatible = "rockchip,rk3568-dfi";
-		rockchip,pmugrf = <0x3a>;
+		rockchip,pmu = <0x3a>;
+		interrupts = <0x00 0x0b 0x04>;
 		status = "okay";
 		phandle = <0xb9>;
 	};
@@ -3120,7 +3124,7 @@
 		reset-names = "pipe";
 		#address-cells = <0x03>;
 		#size-cells = <0x02>;
-		status = "okay";
+		status = "disabled";
 		reset-gpios = <0xc4 0x0a 0x00>;
 		phandle = <0x1e5>;
 
@@ -8118,8 +8122,6 @@
 		mpp_srv = "/mpp-srv";
 		arm_pmu = "/pmu";
 		reserved_memory = "/reserved-memory";
-		drm_logo = "/reserved-memory/drm-logo@0";
-		drm_cubic_lut = "/reserved-memory/drm-cubic-lut@0";
 		ramoops = "/reserved-memory/ramoops@110000";
 		rockchip_suspend = "/rockchip-suspend";
 		rockchip_system_monitor = "/rockchip-system-monitor";

@@ -5,15 +5,13 @@ After=multi-user.target
 [Service]
 Type=oneshot
 ExecStartPre=/bin/sleep 10
-ExecStart=-/sbin/modprobe --ignore-blacklist aic8800_bsp
-ExecStart=-/sbin/modprobe --ignore-blacklist aic_load_fw
+ExecStart=-/sbin/modprobe aic8800_bsp
 ExecStart=-/bin/sh -c "echo fe2c0000.mmc > /sys/bus/platform/drivers/dwmmc_rockchip/unbind"
 ExecStart=/bin/sleep 2
 ExecStart=-/bin/sh -c "echo fe2c0000.mmc > /sys/bus/platform/drivers/dwmmc_rockchip/bind"
 ExecStart=/bin/sleep 3
-ExecStart=-/sbin/modprobe --ignore-blacklist aic8800DC_fdrv
-ExecStart=-/sbin/modprobe --ignore-blacklist aic8800_fdrv
-ExecStart=-/sbin/modprobe --ignore-blacklist aic_btusb
+ExecStart=-/sbin/modprobe aic8800_fdrv
+ExecStart=-/sbin/modprobe aic_btusb
 RemainAfterExit=yes
 
 [Install]
